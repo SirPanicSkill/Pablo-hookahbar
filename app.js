@@ -1,5 +1,4 @@
 import { AppService } from "./service.js?v=0.1";
-import { AppFeatures } from "./features.js?v=0.1";
 import { appConfig } from "./config.js?v=0.1";
 
 'use strict';
@@ -8,22 +7,32 @@ const Service = new AppService();
 const Features = new AppFeatures();
 const config = appConfig();
 
+let mainApp;
+let cardsData = [];
+
 (function() {
 
     // before init
     (() => {
-        // _spPageContextInfo.userId == 29750 ? _spPageContextInfo.userId = 95 : _spPageContextInfo.userId; // Vet
-        // _spPageContextInfo.userId == 29750 ? _spPageContextInfo.userId = 30759 : _spPageContextInfo.userId; // Galina
+        // get all async, then init()
+        Promise.all([
+            Service.get('test.xlsx', true),
+        ]).then(function(data) { init(data); }).catch(function(err) { console.error(err); });
     })();
-    
-    init();
 
     // init
-    function init() {
-        
-        doMainLogic();
+    function init(data) {
+        let responseCardsData = data[0];
 
-        afterInit();
+        getExcelData(responseCardsData).then(e => {
+            let convertedData = convertExcelData(e);
+
+            generateMenuAndCards(convertedData);
+        
+            doMainLogic();
+    
+            afterInit();
+        });
     };
 
     // after init
@@ -33,5 +42,74 @@ const config = appConfig();
 }());
 
 function doMainLogic() {
+    mainApp = new Vue({
+        el: '#App',
+        data: {
+            mainData: cardsData,
+            isCoreLoading: true,
+            isMobile: false,
+            currency: '₽',
+        },
+        computed: {
+            
+        },
+        created: function() {
+            let self = this;
+        },
+        mounted: function() {
+            setTimeout(() => {
+                this.isCoreLoading = false;
+            }, 1000);
+        },
+        beforeUpdate: function() {
+
+        },
+        methods: {
+
+        }
+    });
+};
+
+function getExcelData(e) {
+    return new Promise((resolve, reject) => {
+        let fileReader = new FileReader();
+
+        fileReader.onload = () => {
+          resolve(fileReader.result);
+        };
     
+        fileReader.onerror = reject;
+    
+        fileReader.readAsBinaryString(e);
+    });
+    
+};
+
+function convertExcelData(event) {
+    let data = event;
+    let workbook = XLSX.read(data, { type: "binary" } );
+
+    // get info by sheet
+    return XLSX.utils.sheet_to_row_object_array(workbook.Sheets[workbook.SheetNames[0]]);
+}
+
+function generateMenuAndCards(data) {
+    let iterator = 1;
+
+    data.forEach(element => {
+        if (element['Меню']) {
+            cardsData.push(new CardsConstructor(element['Меню'], []));
+        } else {
+            element.id = iterator;
+            cardsData[cardsData.length - 1]?.Data.push(element);
+        };
+        iterator++;
+    });
+
+    function CardsConstructor(name, arr) {
+        this.Title = name;
+        this.Data = arr;
+    }
+
+    console.log(cardsData);
 };

@@ -27,16 +27,71 @@
 
         <link type="text/css" rel="stylesheet" href="frontend/animate.css"/>
         <link type="text/css" rel="stylesheet" href="style.css?v=0.1"/>
-        <script type="module" src="frontend/vue.min.js"></script>
+        <script type="text/javascript" src="frontend/xlsx.full.min.js"></script>
+        <script type="text/javascript" src="frontend/vue.min.js"></script>
         <script type="module" src="app.js?v=0.1"></script>
     </head>
     <body>
-        <div id="App">
+        <div id="App" v-cloak v-bind:class="{ loading: isCoreLoading }">
             <noscript class="no_script_message">
                 У вас отключен JavaScript. Сайт может отображаться некорректно. Рекомендуем включить JavaScript.
             </noscript> 
-            <header></header>
-            <main></main>
+            <header>
+                <section class="header">
+                    <div class="section__wrapper header__wrapper">
+                        <div class="header__logo__wrapper">
+                            <img src="images/logo.png" alt="logo" class="header__logo">
+                        </div>
+                        <div class="header__order__wrapper"></div>
+                        <div class="header__logoText__wrapper">
+                            <img src="images/logo_text.png" alt="logoText" class="header__logoText">
+                            <span class="header__logoText__text">Выбирайте позиции по меню<br>и делайте заказ у официанта</span>
+                        </div>
+                        <div class="header__arrow__wrapper">
+                            <div class="header__arrow"></div>
+                        </div>
+                    </div>
+                </section>
+            </header>
+            <main>
+                <section class="menu">
+                    <div class="section__wrapper menu__wrapper">
+                        <div class="menu__container" v-bind:class="{ mobile: isMobile }">
+                            <div class="menu__btn"></div>
+                            <div class="menu__item__wrapper">
+                                <div class="menu__item" v-for="item in mainData">{{ item.Title }}</div>
+                            </div>
+                        </div>
+                        <div class="order__container"></div>
+                    </div>
+                </section>
+                <section class="menu__position" v-for="menuPosition in mainData">
+                    <div class="section__wrapper menu__position__wrapper">
+                        <span class="menu__position__title">{{ menuPosition.Title }}</span>
+                        <div class="menu__position__item__wrapper">
+                            <div class="menu__position__item" v-bind:data-id="item.id" v-for="item in menuPosition.Data">
+                                <div class="menu__position__item__top">
+                                    <img v-bind:src="'images/menu/' + menuPosition.Title + '/' + item['Картинка']" alt="menu item" class="menu__position__item__img">
+                                </div>
+                                <div class="menu__position__item__middle">
+                                    <div class="menu__position__item__title__wrapper">
+                                        <span class="menu__position__item__title">{{ item['Назание'] }}</span>
+                                        <span class="menu__position__item__size">{{ item['Вес/объём'] }}</span>
+                                    </div>
+                                    <span class="menu__position__item__about">{{ item['Описание'] }}</span>
+                                </div>
+                                <div class="menu__position__item__bottom">
+                                    <span class="menu__position__item__price">{{ item['Цена'] }} {{ currency }}</span>
+                                    <div class="menu__position__item__btn__wrapper">
+                                        <div class="menu__position__item__btn__add">Добавить</div>
+                                        <div class="menu__position__item__btn__multiple"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </main>
             <footer></footer>
         
             <!-- Modal: order -->

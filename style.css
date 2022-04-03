@@ -1,32 +1,34 @@
+@import url("font/Manrope/manrope.css");
+@import url("font/Pacifico/pacifico.css");
+
 /*******************\
         CORE
 \*******************/
 /* normalize */
 html, body, div, h1, p, a, video {
-  margin: 0;
-  padding: 0;
+    margin: 0;
+    padding: 0;
 }
 html, body {
-  height: 100%;
-  width: 100%;
+    height: 100%;
+    width: 100%;
 }
 /* Body typography */
 body {
-  -webkit-font-smoothing: antialiased;
+    -webkit-font-smoothing: antialiased;
 }
 /* Links */
 a {
-  text-decoration: none;
-  color: #d2a473;
-  -webkit-transition: color 0.1s ease;
-  transition: color 0.1s ease;
-  outline: 0;
+    text-decoration: none;
+    color: #d2a473;
+    -webkit-transition: color 0.1s ease;
+    transition: color 0.1s ease;
+    outline: 0;
 }
 a:hover, a:focus {
-  text-decoration: none;
-  outline: 0;
+    text-decoration: none;
+    outline: 0;
 }
-/* убрать выделение */
 body {
     -webkit-tap-highlight-color: rgba(255, 255, 255, 0);
     -webkit-focus-ring-color: rgba(255, 255, 255, 0);
@@ -34,7 +36,6 @@ body {
     resize: none;
     -webkit-text-size-adjust: none;
 }
-    /* оставить выделение для полей ввода */
     input, textarea {
         -moz-user-select: text;
         -o-user-select: text;
@@ -43,7 +44,28 @@ body {
         user-select: text;
         resize: none;
     }
-    
+
+/* scroll */
+::-webkit-scrollbar {
+    width: 16px;
+    background-color: transparent;
+}
+::-webkit-scrollbar-thumb {
+    background-color: #019e47;
+    border: 4px solid transparent;
+    border-radius: 10px;
+    background-clip: padding-box;
+}
+::-webkit-scrollbar-thumb:hover {
+    cursor: pointer;
+    background-color: #d2d2d2;
+}
+::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+[v-cloak] { display: none !important }
+
 .loading {
     overflow: hidden !important;
     position: relative;
@@ -55,19 +77,260 @@ body {
         height: 100%;
         left: 0;
         top: 0;
-        background-image: url(/my/Documents/pages/covid/images/loading.gif);
+        background-image: url(images/logo.png);
         background-repeat: no-repeat;
         background-position: center;
         background-size: 230px 150px;
-        background-color: rgba(255, 255, 255, .8);
+        background-color: rgb(0 0 0);
         z-index: 9999;
+        animation: pulse 1s infinite;
     }
 
 
 /*******************\     
        MARKUP
 \*******************/
+body {
+    background-color: #0c0d0f;
+    max-height: 100vh;
+    overflow: hidden;
+}
+    #App {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        height: 100%;
+        padding: 0px;
+        margin: 0px;
+        overflow: auto;
+    }
+        .section__wrapper {
+            max-width: 1260px;
+            width: calc(100% - 20px);
+            margin: 0 10px;
+        }
 
+/* header */
+header {
+    display: flex;
+    flex-direction: column;
+}
+    .header {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width:  100%;
+        min-height: 110vh;
+        background-image: url(images/background_header_leaf-left.png), url(images/background_header_leaf-right.png), url(images/background_header.png);
+        background-repeat: no-repeat;
+        background-position: left, right, 50% 100%;
+        background-size: contain, contain, cover;
+    }
+        .header__wrapper {
+            display: flex;
+            flex-direction: column;
+            margin-top: 50px;
+            height: 100%;
+            justify-content: space-between;
+        }
+            .header__logo__wrapper {
+                display: flex;
+            }
+                .header__logo {
+                    display: flex;
+                }
+            .header__order__wrapper {
+                display: flex;
+            }
+            .header__logoText__wrapper {
+                display: flex;
+                flex-direction: column;
+                margin: 20px 0;
+            }
+                .header__logoText {
+                    display: flex;
+                    max-width: 632px;
+                    margin-bottom: 65px;
+                }
+                .header__logoText__text {
+                    display: flex;
+                    font-family: 'Manrope ExtraLight';
+                    color: #fff;
+                    font-size: 36px;
+                    line-height: 48px;
+                }
+            .header__arrow__wrapper {
+                display: flex;
+                justify-content: flex-start;
+            }
+                .header__arrow {
+                    display: flex;
+                    width: 104px;
+                    height: 104px;
+                    background-image: url(images/arrow_down.png);
+                    background-repeat: no-repeat;
+                    background-position: center;
+                    background-size: auto;
+                    margin: 20px 0;
+                    cursor: pointer;
+                }
+
+/* main */
+main {
+    display: flex;
+    flex-direction: column;
+    gap: 80px;
+}
+    .menu {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
+    }
+        .menu__wrapper {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 20px;
+        }
+            .menu__container {
+                display: flex;
+                flex-direction: column;
+                flex-grow: 1;
+            }
+                .menu__btn {
+                    display: flex;
+                }
+                .menu__item__wrapper {
+                    display: flex;
+                    flex-wrap: wrap;
+                    gap: 20px;
+                }
+                    .menu__item {
+                        display: flex;
+                        font-family: 'Manrope ExtraLight';
+                        font-size: 22px;
+                        color: #fff;
+                        cursor: pointer;
+                    }
+                    .menu__item:hover {
+                        color: #ff9300;
+                    }
+            .order__container {
+                display: flex;
+                flex-shrink: 0;
+            }
+    .menu__position {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
+    }
+        .menu__position__wrapper {
+            display: flex;
+            flex-direction: column;
+            gap: 60px;
+        }
+            .menu__position__title {
+                display: flex;
+                font-family: 'Manrope Bold';
+                font-size: 46px;
+                color: #fff;
+            }
+            .menu__position__item__wrapper {
+                display: flex;
+                flex-wrap: wrap;
+                gap: 30px;
+            }
+                .menu__position__item {
+                    display: flex;
+                    flex-direction: column;
+                    flex-grow: 0;
+                    flex-shrink: 0;
+                    flex-basis: 400px;
+                    max-width: 400px;
+                    height: 590px;
+                    background-color: #141617;
+                    border-radius: 10px;
+                    overflow: hidden;
+                }
+                    .menu__position__item__top {
+                        display: flex;
+                        position: relative;
+                        overflow: hidden;
+                    }
+                        .menu__position__item__img {
+                            display: flex;
+                            margin: -1px;
+                            width: calc(100% + 2px);
+                            height: calc(100% + 2px);
+                        }
+                    .menu__position__item__middle {
+                        display: flex;
+                        flex-direction: column;
+                        margin: 30px 20px 10px;
+                        gap: 10px;
+                    }
+                        .menu__position__item__title__wrapper {
+                            display: flex;
+                            justify-content: space-between;
+                            gap: 20px;
+                            align-items: baseline;
+                        }
+                            .menu__position__item__title {
+                                display: flex;
+                                font-family: 'Manrope Medium';
+                                font-size: 28px;
+                                color: #fff;
+                            }
+                            .menu__position__item__size {
+                                display: flex;
+                                font-family: 'Manrope ExtraLight';
+                                font-size: 17px;
+                                color: rgba(255,255,255, .5);
+                            }
+                        .menu__position__item__about {
+                            display: flex;
+                            font-family: 'Manrope ExtraLight';
+                            font-size: 17px;
+                            line-height: 22px;
+                            color: rgba(255,255,255, .8);
+                        }
+                    .menu__position__item__bottom {
+                        display: flex;
+                        margin: 0px 20px 20px;
+                        flex-grow: 1;
+                        align-items: flex-end;
+                        justify-content: space-between;
+                        gap: 20px;
+                    }
+                        .menu__position__item__price {
+                            display: flex;
+                            font-family: 'Manrope ExtraLight';
+                            font-size: 28px;
+                            color: #fff;
+                        }
+                        .menu__position__item__btn__wrapper {
+                            display: flex;
+                            font-family: 'Manrope ExtraLight';
+                            font-size: 17px;
+                            color: #fff;
+                            width: 141px;
+                            height: 40px;
+                            justify-content: center;
+                            align-items: center;
+                            border-radius: 5px;
+                            border: 1px solid #fff;
+                            cursor: pointer;
+                        }
+                        .menu__position__item__btn__wrapper:hover {
+                            animation: headShake 1s;
+                        }
+                            .menu__position__item__btn__add {
+                                display: flex;
+                            }
+                            .menu__position__item__btn__multiple {
+                                display: flex;
+                            }
 
 /*******************\     
         MODAL

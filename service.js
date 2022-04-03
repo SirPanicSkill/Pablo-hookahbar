@@ -1,16 +1,11 @@
 export class AppService {
     constructor() {}
 
-    async get(url) {
-        let response = await fetch(url, {
-            headers: {
-                accept: "application/json"
-            }
-        });
+    async get(url, isResponseBlob) {
+        let response = await fetch(url);
 
         if (response.ok) {
-            let json = await response.json();
-            let data = json.d;
+            let data = isResponseBlob ? await response.blob() : await response.json();
 
             return data;
         } else {
