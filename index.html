@@ -42,7 +42,9 @@
                         <div class="header__logo__wrapper">
                             <img src="images/logo.png" alt="logo" class="header__logo">
                         </div>
-                        <div class="header__order__wrapper"></div>
+                        <div class="header__order__wrapper">
+                            <menu-order v-bind:price="price" v-bind:currency="currency" v-on:openModalOrder="modalOrder.isOpen = true"></menu-order>
+                        </div>
                         <div class="header__logoText__wrapper">
                             <img src="images/logo_text.png" alt="logoText" class="header__logoText">
                             <span class="header__logoText__text">Выбирайте позиции по меню<br>и делайте заказ у официанта</span>
@@ -62,7 +64,9 @@
                                 <div class="menu__item" v-for="item in mainData">{{ item.Title }}</div>
                             </div>
                         </div>
-                        <div class="order__container"></div>
+                        <div class="order__container">
+                            <menu-order v-bind:price="price" v-bind:currency="currency" v-on:openModalOrder="modalOrder.isOpen = true"></menu-order>
+                        </div>
                     </div>
                 </section>
                 <section class="menu__position" v-for="menuPosition in mainData">

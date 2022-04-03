@@ -4,7 +4,6 @@ import { appConfig } from "./config.js?v=0.1";
 'use strict';
 
 const Service = new AppService();
-const Features = new AppFeatures();
 const config = appConfig();
 
 let mainApp;
@@ -42,10 +41,25 @@ let cardsData = [];
 }());
 
 function doMainLogic() {
+    // completed component
+    Vue.component('menu-order', {
+        props: ['price', 'currency'],
+        data: function () {
+            return {
+                count: 0
+            }
+        },
+        template: `<button class="menu__order" v-on:click="$emit('openModalOrder')">Заказ / {{ price }} {{ currency }}</button>`
+    });
+
     mainApp = new Vue({
         el: '#App',
         data: {
             mainData: cardsData,
+            modalOrder: {
+                isOpen: false,
+            },
+            price: 0,
             isCoreLoading: true,
             isMobile: false,
             currency: '₽',
