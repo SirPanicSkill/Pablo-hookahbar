@@ -58,8 +58,11 @@
             <main>
                 <section class="menu">
                     <div class="section__wrapper menu__wrapper">
-                        <div class="menu__container">
-                            <div class="menu__btn"></div>
+                        <div class="menu__container" v-bind:class="{ open: isMobileMenuOpen }">
+                            <div class="menu__mobile__wrapper" v-show="isMobile">
+                                <div class="menu__mobile__btn" @click="isMobileMenuOpen = !isMobileMenuOpen"></div>
+                                <span class="menu__mobile__title menu__item">{{ menuActive }}</span>
+                            </div>
                             <div class="menu__item__wrapper">
                                 <div class="menu__item" v-bind:class="{ active: item.Title === menuActive }" v-for="item in mainData" @click="goToMenu(item.Title)">{{ item.Title }}</div>
                             </div>

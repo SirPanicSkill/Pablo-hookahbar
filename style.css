@@ -46,21 +46,21 @@ body {
     }
 
 /* scroll */
-::-webkit-scrollbar {
+#App:not(.mobile)::-webkit-scrollbar {
     width: 16px;
     background-color: transparent;
 }
-::-webkit-scrollbar-thumb {
+#App:not(.mobile)::-webkit-scrollbar-thumb {
     background-color: #019e47;
     border: 4px solid transparent;
     border-radius: 10px;
     background-clip: padding-box;
 }
-::-webkit-scrollbar-thumb:hover {
+#App:not(.mobile)::-webkit-scrollbar-thumb:hover {
     cursor: pointer;
     background-color: #d2d2d2;
 }
-::-webkit-scrollbar-track {
+#App:not(.mobile)::-webkit-scrollbar-track {
     background: transparent;
 }
 
@@ -221,13 +221,46 @@ main {
                 flex-direction: column;
                 flex-grow: 1;
             }
-                .menu__btn {
+                .menu__mobile__wrapper {
                     display: flex;
+                    align-items: center;
                 }
+                    .menu__mobile__btn {
+                        display: flex;
+                        position: relative;
+                        width: 32px;
+                        height: 28px;
+                        margin: 10px;
+                        cursor: pointer;
+                    }
+                        .menu__mobile__btn::before,
+                        .menu__mobile__btn::after {
+                            content: '';
+                            position: absolute;
+                            width: 100%;
+                            height: 13px;max-height: 13px;
+                            border-top: 2px solid #fff;
+                            border-bottom: 2px solid #fff;
+                            transition: all .3s;
+                        }
+                        .menu__mobile__btn::before {
+                            transform: rotateX(45deg);
+                        }
+                        .menu__mobile__btn::after {
+                            transform: rotateX(-45deg);
+                            bottom: 0;
+                        }
+                    .menu__mobile__title {
+                        display: flex;
+                        margin: 0 auto;
+                    }
                 .menu__item__wrapper {
                     display: flex;
                     flex-wrap: wrap;
                     gap: 20px;
+                    max-height: 1000px;
+                    padding-top: 20px;
+                    transition: all .3s;
                 }
                     .menu__item {
                         display: flex;
@@ -324,7 +357,7 @@ main {
                         }
                         .menu__position__item__img[src$='none.png'] {
                             width: 50%;
-                            height: 50%;
+                            height: auto;
                         }
                     .menu__position__item__middle {
                         display: flex;
@@ -473,6 +506,38 @@ main {
                 line-height: 38px;
             }
 
+.mobile .menu__item {
+    padding: 5px 20px;
+    border: 1px solid #fff;
+    border-radius: 5px;
+}
+.mobile .menu__item.active {
+    border-color: #ff9300;
+    color: #fff;
+    background-color: #ff9300;
+}
+.mobile .menu__item__wrapper {
+    padding-top: 0;
+    max-height: 0px;
+    overflow: hidden;
+}
+    .menu__container.open .menu__mobile__btn::before {
+        max-height: 1px;
+        top: 50%;
+        transform: rotate(315deg);
+        transform-origin: center;
+    }
+    .menu__container.open .menu__mobile__btn::after {
+        max-height: 1px;
+        top: 50%;
+        transform: rotate(45deg);
+        transform-origin: center;
+    }
+    .mobile .menu__container.open .menu__item__wrapper {
+        padding-top: 20px;
+        max-height: 1000px;
+    }
+
 /*******************\     
         MODAL
 \*******************/
@@ -548,9 +613,9 @@ main {
     .menu__position__item__wrapper {
         justify-content: center;
     }
-        .menu__position__item {
-            
-        flex-grow: 1;}
+        .menu__position__item {   
+            flex-grow: 1;
+        }
 }
 /* style for device width < 575px */
 @media (max-width: 574.98px) {

@@ -57,6 +57,7 @@ function doMainLogic() {
         data: {
             mainData: cardsData,
             menuActive: '',
+            menuActiveByClick: false,
             modalOrder: {
                 isOpen: false,
             },
@@ -64,6 +65,7 @@ function doMainLogic() {
             scrollPos: 0,
             isCoreLoading: true,
             isMobile: false,
+            isMobileMenuOpen: false,
             currency: '₽',
         },
         computed: {
@@ -94,13 +96,15 @@ function doMainLogic() {
             
             
             // scroll + menu
-            App.addEventListener('scroll', () => {
+            App.addEventListener('scroll', (e) => {
                 let halfScreen = App.offsetHeight / 2;
                 let scrolledBy = App.scrollTop;
                 let scrollDirection = true; // true = down, false = up
 
                 scrolledBy > this.scrollPos ? scrollDirection = true : scrollDirection = false;
+                this.scrollPos = scrolledBy;
                 
+                if (this.menuActiveByClick) return;
                 for (let i = 0; i < this.mainData.length; i++) {
                     let val = 0;
                     scrollDirection ? val = this.mainData[i].offsetTop - halfScreen : val = this.mainData[i].offsetTop + halfScreen;
@@ -110,20 +114,33 @@ function doMainLogic() {
                         break;
                     };
                 };
-
-                this.scrollPos = scrolledBy;
-            });
+            }, { passive: true });
         },
         beforeUpdate: function() {
 
+        },
+        updated: function () {
+            // this.$nextTick(function () {
+            //    setTimeout(() => {
+            //        this.menuActive = this.menuActive;
+            //    }, 2000); 
+            // });
         },
         methods: {
             goToMenu: function(title) {
                 let target = document.querySelector(`section.menu__position[data-title='${ title }']`).offsetTop;
                 let menu = document.querySelector(`section.menu`).offsetHeight;
-                let scrollLength = target - menu;
+                let scrollLength;
 
+                this.isMobile ? scrollLength = target - menu : scrollLength = target;
+                this.isMobileMenuOpen = false;
+                this.menuActiveByClick = true;
+                this.menuActive = title;
                 App.scrollTo({ top: scrollLength, behavior: 'smooth' });
+
+                setTimeout(() => {
+                    this.menuActiveByClick = false;                    
+                }, 1000);
             },
         }
     });
