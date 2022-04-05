@@ -32,7 +32,7 @@
         <script type="module" src="app.js?v=0.1"></script>
     </head>
     <body>
-        <div id="App" v-cloak v-bind:class="{ loading: isCoreLoading }">
+        <div id="App" v-cloak v-bind:class="{ loading: isCoreLoading, mobile: isMobile }">
             <noscript class="no_script_message">
                 У вас отключен JavaScript. Сайт может отображаться некорректно. Рекомендуем включить JavaScript.
             </noscript> 
@@ -42,15 +42,15 @@
                         <div class="header__logo__wrapper">
                             <img src="images/logo.png" alt="logo" class="header__logo">
                         </div>
-                        <div class="header__order__wrapper">
+                        <!-- <div class="header__order__wrapper">
                             <menu-order v-bind:price="price" v-bind:currency="currency" v-on:openModalOrder="modalOrder.isOpen = true"></menu-order>
-                        </div>
+                        </div> -->
                         <div class="header__logoText__wrapper">
                             <img src="images/logo_text.png" alt="logoText" class="header__logoText">
                             <span class="header__logoText__text">Выбирайте позиции по меню<br>и делайте заказ у официанта</span>
                         </div>
                         <div class="header__arrow__wrapper">
-                            <div class="header__arrow"></div>
+                            <div class="header__arrow" @click="document.querySelector('main').scrollIntoView({behavior: 'smooth'})"></div>
                         </div>
                     </div>
                 </section>
@@ -58,45 +58,105 @@
             <main>
                 <section class="menu">
                     <div class="section__wrapper menu__wrapper">
-                        <div class="menu__container" v-bind:class="{ mobile: isMobile }">
+                        <div class="menu__container">
                             <div class="menu__btn"></div>
                             <div class="menu__item__wrapper">
-                                <div class="menu__item" v-for="item in mainData">{{ item.Title }}</div>
+                                <div class="menu__item" v-bind:class="{ active: item.Title === menuActive }" v-for="item in mainData" @click="goToMenu(item.Title)">{{ item.Title }}</div>
                             </div>
                         </div>
-                        <div class="order__container">
+                        <!-- <div class="order__container">
                             <menu-order v-bind:price="price" v-bind:currency="currency" v-on:openModalOrder="modalOrder.isOpen = true"></menu-order>
-                        </div>
+                        </div> -->
                     </div>
                 </section>
-                <section class="menu__position" v-for="menuPosition in mainData">
+                <section class="menu__position" v-bind:class="{ active: menuPosition.Title === menuActive }" v-bind:data-title="menuPosition.Title" v-for="menuPosition in mainData">
                     <div class="section__wrapper menu__position__wrapper">
                         <span class="menu__position__title">{{ menuPosition.Title }}</span>
                         <div class="menu__position__item__wrapper">
                             <div class="menu__position__item" v-bind:data-id="item.id" v-for="item in menuPosition.Data">
                                 <div class="menu__position__item__top">
-                                    <img v-bind:src="'images/menu/' + menuPosition.Title + '/' + item['Картинка']" alt="menu item" class="menu__position__item__img">
+                                    <img v-bind:src="'images/menu/' + menuPosition.Title + '/' + item['Картинка']" onerror="this.src='images/menu/none.png'" alt="menu item" class="menu__position__item__img">
                                 </div>
                                 <div class="menu__position__item__middle">
                                     <div class="menu__position__item__title__wrapper">
-                                        <span class="menu__position__item__title">{{ item['Назание'] }}</span>
+                                        <span class="menu__position__item__title" v-html="item['Назание']"></span>
                                         <span class="menu__position__item__size">{{ item['Вес/объём'] }}</span>
                                     </div>
-                                    <span class="menu__position__item__about">{{ item['Описание'] }}</span>
+                                    <span class="menu__position__item__about" v-html="item['Описание']"></span>
                                 </div>
                                 <div class="menu__position__item__bottom">
                                     <span class="menu__position__item__price">{{ item['Цена'] }} {{ currency }}</span>
-                                    <div class="menu__position__item__btn__wrapper">
+                                    <!-- <div class="menu__position__item__btn__wrapper">
                                         <div class="menu__position__item__btn__add">Добавить</div>
                                         <div class="menu__position__item__btn__multiple"></div>
-                                    </div>
+                                    </div> -->
                                 </div>
                             </div>
                         </div>
                     </div>
                 </section>
             </main>
-            <footer></footer>
+            <footer>
+                <section class="footer">
+                    <div class="section__wrapper footer__wrapper">
+                        <div class="footer__top">
+                            <span class="footer__title">ПРАВИЛА PABLO HOOKAHBAR<br>ДЛЯ НАШИХ ЛЮБИМЫХ ГОСТЕЙ</span>
+                        </div>
+                        <div class="footer__bottom">
+                            <div class="footer__left">
+                                <span class="footer__block">
+                                    Если вам не понравился кальян,скажите<br>
+                                    об этом за 10 минут после выноса.<br>
+                                    Мы бесплатно заменим.
+                                </span>
+                                <span class="footer__block">
+                                    1-4 человека 1 кальян <br>
+                                    5-7 человек 2 кальяна <br>
+                                    8-10 человек 3 кальяна 
+                                </span>
+                                <span class="footer__block">
+                                    Курение кальяна в нашем заведении составляет не более 2-х часов,по истечению этого времени,вы можете заказать ещё один или несколько кальянов и продлить время препровождения в нашем заведении.
+                                </span>
+                                <hr class="footer__hr">
+                                <span class="footer__block">
+                                    У нас нельзя приносить с собой <br>
+                                    Б/А напитки,пиво,кофе.<br>
+                                    -<br>
+                                    Но вы можете
+                                </span>
+                                <span class="footer__block">
+                                    Приносить с собой алкогольные напитки с чеком,которые будут облагаться пробковым сбором 300 руб./1 бутылка.При счёте от 2000руб,пробковый сбор отменяется.<br>
+                                    В нашем заведении заказ кальяна до 19:00 не обязателен.
+                                </span>
+                            </div>
+                            <div class="footer__right">
+                                <span class="footer__block">
+                                    ПОРЧА ИМУЩЕСТВА:<br>
+                                    — прожечь/испортить<br>
+                                    Стол 5000₽<br>
+                                    Кресло 6000₽<br>
+                                    Диван 10000₽<br>
+                                    —разбить<br>
+                                    Посуда 500₽/1 шт <br>
+                                    Кальянную чашу 1000₽<br>
+                                    Кальянную колбу 2500₽
+                                </span>
+                                <span class="footer__block">
+                                    —разбить/испортить/сломать<br>
+                                    Джойстик PLAYSTATION 4 5000₽<br>
+                                    Консоль PLAYSTATION 4 25000₽
+                                </span>
+                                <span class="footer__block">
+                                    Предъявите документы!!!<br>
+                                    <br>
+                                    Наше заведение является частной собственностью,персонал имеет право не пускать и не обслуживать вас,без предъявления оригинала или нотариально заверенной копии документа,подтверждающего ваше совершеннолетие.<br>
+                                    Список подходящих документов: паспорт РФ,заграничный паспорт или водительское удостоверение.
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </footer>
         
             <!-- Modal: order -->
             <div class="pablo__modal" id="order" tabindex="-1">
