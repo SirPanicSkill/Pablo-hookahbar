@@ -132,7 +132,7 @@ function doMainLogic() {
                 let menu = document.querySelector(`section.menu`).offsetHeight;
                 let scrollLength;
 
-                this.isMobile ? scrollLength = target - menu : scrollLength = target;
+                scrollLength = this.isMobile ? target - 400 : target - menu;
                 this.isMobileMenuOpen = false;
                 this.menuActiveByClick = true;
                 this.menuActive = title;
