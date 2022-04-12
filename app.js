@@ -81,7 +81,7 @@ function doMainLogic() {
             // preloader
             setTimeout(() => {
                 this.isCoreLoading = false;
-            }, 1000);
+            }, 500);
 
             this.$nextTick(function () {
                 // set menu active
