@@ -329,7 +329,7 @@ main {
                     flex-shrink: 1;
                     flex-basis: calc((100% / 3) - 20px);
                     max-width: 400px;
-                    min-height: 590px;
+                    /* min-height: 590px; */
                     background-color: #141617;
                     border-radius: 10px;
                     overflow: hidden;
