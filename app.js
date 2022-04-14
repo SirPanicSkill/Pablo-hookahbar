@@ -15,7 +15,7 @@ let cardsData = [];
     (() => {
         // get all async, then init()
         Promise.all([
-            Service.get('test.xlsx', true),
+            Service.get('menu.xlsx', true),
         ]).then(function(data) { init(data); }).catch(function(err) { console.error(err); });
     })();
 

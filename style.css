@@ -185,6 +185,10 @@ header {
 main {
     display: flex;
     flex-direction: column;
+    background-image: url(images/back_bottom.png), url(images/back_smoke_bottom.png);
+    background-repeat: no-repeat;
+    background-position: 100% 100%, 49% calc(100% + 7vw);
+    background-size: 130vw, 121%;
 }
     .menu__order {
         display: flex;
@@ -427,6 +431,41 @@ main {
                             .menu__position__item__btn__multiple {
                                 display: flex;
                             }
+
+/* backs */
+.menu__position[data-title="Пиво"] {
+    background-image: url(images/back_beer_smoke1.png), url(images/back_beer_smoke2.png);
+    background-repeat: no-repeat;
+    background-position: 0 50%, 100% 100%;
+    background-size: contain, contain;
+}
+.menu__position[data-title="Молочные коктейли"]::after {
+    content: '';
+    position: absolute;background-image: url(images/background_sparks.png);
+    background-repeat: no-repeat;
+    background-position: -15% 50%;
+    background-size: 35%;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    z-index: 0;
+    opacity: 0.5;
+    filter: saturate(0.5);
+}
+.menu__position[data-title="Коктейли"] {
+    background-image: url(images/кальян.png);
+    background-repeat: no-repeat;
+    background-position: 100% 100%;
+    background-size: 41%;
+}
+.menu__position[data-title="Дымные чаши"] {
+    background-image: url(images/дымные-чаши-1.png);
+    background-repeat: no-repeat;
+    background-position: -10% 100%;
+    background-size: 27%;
+}
+
 /* footer */
 .footer {
     display: flex;
@@ -627,6 +666,10 @@ main {
         .menu__position__item {   
             flex-grow: 1;
         }
+    main {
+        background-position: 100% 100%, 49% calc(100% + 43px);
+        background-size: 335vw, 121%;
+    }
 }
 /* style for device width < 575px */
 @media (max-width: 574.98px) {
