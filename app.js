@@ -174,7 +174,10 @@ function generateMenuAndCards(data) {
 
     data.forEach(element => {
         if (element['Меню']) {
-            cardsData.push(new CardsConstructor(element['Меню'], []));
+            let title = element['Меню'];
+
+            title = title.split(',').length > 1 ? title.split(',').join(', ') : title;
+            cardsData.push(new CardsConstructor(title, []));
         } else {
             element.id = iterator;
             cardsData[cardsData.length - 1]?.Data.push(element);
@@ -186,6 +189,4 @@ function generateMenuAndCards(data) {
         this.Title = name;
         this.Data = arr;
     }
-
-    console.log(cardsData);
 };

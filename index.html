@@ -26,10 +26,10 @@
         <meta name="format-detection" content="address=yes">
 
         <link type="text/css" rel="stylesheet" href="frontend/animate.css"/>
-        <link type="text/css" rel="stylesheet" href="style.css?v=0.2"/>
+        <link type="text/css" rel="stylesheet" href="style.css?v=0.3"/>
         <script type="text/javascript" src="frontend/xlsx.full.min.js"></script>
         <script type="text/javascript" src="frontend/vue.min.js"></script>
-        <script type="module" src="app.js?v=0.2"></script>
+        <script type="module" src="app.js?v=0.4"></script>
     </head>
     <body>
         <div id="App" v-cloak v-bind:class="{ loading: isCoreLoading, mobile: isMobile }">
@@ -78,7 +78,7 @@
                         <div class="menu__position__item__wrapper">
                             <div class="menu__position__item" v-bind:data-id="item.id" v-for="item in menuPosition.Data">
                                 <div class="menu__position__item__top">
-                                    <img v-bind:src="'images/menu/' + menuPosition.Title + '/' + item['Картинка']" onerror="this.src='images/menu/none.png'" alt="menu item" class="menu__position__item__img">
+                                    <img v-bind:src="'images/menu/' + menuPosition.Title.split(', ').join() + '/' + item['Картинка']" onerror="this.src='images/menu/none.png'" alt="menu item" class="menu__position__item__img">
                                 </div>
                                 <div class="menu__position__item__middle">
                                     <div class="menu__position__item__title__wrapper">
