@@ -2,34 +2,41 @@
     font-family: 'Manrope Bold';
     src: local('Manrope Bold'), local('Manrope-Bold'), url('Manrope-Bold.woff2') format('woff2'), url('Manrope-Bold.woff') format('woff'), url('Manrope-Bold.ttf') format('truetype');
     font-style: normal;
+    font-display: swap;
 }
 @font-face {
     font-family: 'Manrope ExtraBold';
     src: local('Manrope ExtraBold'), local('Manrope-ExtraBold'), url('Manrope-ExtraBold.woff2') format('woff2'), url('Manrope-ExtraBold.woff') format('woff'), url('Manrope-ExtraBold.ttf') format('truetype');
     font-style: normal;
+    font-display: swap;
 }
 @font-face {
     font-family: 'Manrope ExtraLight';
     src: local('Manrope ExtraLight'), local('Manrope-ExtraLight'), url('Manrope-ExtraLight.woff2') format('woff2'), url('Manrope-ExtraLight.woff') format('woff'), url('Manrope-ExtraLight.ttf') format('truetype');
     font-style: normal;
+    font-display: swap;
 }
 @font-face {
     font-family: 'Manrope Light';
     src: local('Manrope Light'), local('Manrope-Light'), url('Manrope-Light.woff2') format('woff2'), url('Manrope-Light.woff') format('woff'), url('Manrope-Light.ttf') format('truetype');
     font-style: normal;
+    font-display: swap;
 }
 @font-face {
     font-family: 'Manrope Medium';
     src: local('Manrope Medium'), local('Manrope-Medium'), url('Manrope-Medium.woff2') format('woff2'), url('Manrope-Medium.woff') format('woff'), url('Manrope-Medium.ttf') format('truetype');
     font-style: normal;
+    font-display: swap;
 }
 @font-face {
     font-family: 'Manrope Regular';
     src: local('Manrope Regular'), local('Manrope-Regular'), url('Manrope-Regular.woff2') format('woff2'), url('Manrope-Regular.woff') format('woff'), url('Manrope-Regular.ttf') format('truetype');
     font-style: normal;
+    font-display: swap;
 }
 @font-face {
     font-family: 'Manrope SemiBold';
     src: local('Manrope SemiBold'), local('Manrope-SemiBold'), url('Manrope-SemiBold.woff2') format('woff2'), url('Manrope-SemiBold.woff') format('woff'), url('Manrope-SemiBold.ttf') format('truetype');
     font-style: normal;
+    font-display: swap;
 }
